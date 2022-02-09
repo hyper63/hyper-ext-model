@@ -79,9 +79,9 @@ await profiles.count()
 await profiles.sync(checkpoint) // returns {ok: true, checkpoint: 'xxx'}
 
 // add attachment
-await profiles.addAttachment(name, stream)
+await profiles.addAttachment(modelId, attachmentName, stream)
 // download attachment
-await profiles.getAttachment(name) // returns stream
+await profiles.getAttachment(modelId, attachmentName) // returns stream
 ```
 
 
@@ -96,3 +96,12 @@ The modes, provide basic composition workflows for each action.
 ## API
 
 TBD
+
+
+### Notify
+
+if enabled, then `model` will generate a notifiation event using the queue service based on model:actions, and the `action, result, timestamp, and identifier` will be supplied in the notification. Then the receive of the notification can extract any data based on their access level to the model and hyper app in question. This is great to trigger emails, or sms messages based on a specific event.
+
+### Attachments
+
+if enabled, then the `model` can upload and download unstructured data files for a given model, this is great for models that have unstructured documents that accompany them.
