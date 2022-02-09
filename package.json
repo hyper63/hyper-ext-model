@@ -25,6 +25,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
+    "crocks": "^0.12.4",
     "ramda": "^0.28.0"
   }
 }

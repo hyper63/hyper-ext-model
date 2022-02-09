@@ -5,8 +5,12 @@ Deno.test("ok", () => {
   assertEquals(true, true);
 });
 
-const hyper = model({});
-const profiles = hyper.ext.model();
+const hyper = model({
+  data: {
+    get: () => Promise.resolve({ _id: "1" }),
+  },
+});
+const profiles = hyper.ext.model({ cache: false });
 
 Deno.test("upsert document successfully", async () => {
   const result = await profiles.upsert("1", { username: "rakis" });
@@ -16,8 +20,8 @@ Deno.test("upsert document successfully", async () => {
 
 Deno.test("get document successfully", async () => {
   const result = await profiles.get("1");
-  assertEquals(result.ok, false);
-  assertEquals(result.msg, "Not Implemented!");
+  console.log(result);
+  assertEquals(result._id, "1");
 });
 
 Deno.test("remove document successfully", async () => {
