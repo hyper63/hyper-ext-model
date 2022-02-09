@@ -1,5 +1,10 @@
 import { assertEquals } from "asserts";
 import { model } from "./mod.ts";
+import { z } from "zod";
+
+const schema = z.object({
+  _id: z.string(),
+});
 
 Deno.test("ok", () => {
   assertEquals(true, true);
@@ -10,7 +15,7 @@ const hyper = model({
     get: () => Promise.resolve({ _id: "1" }),
   },
 });
-const profiles = hyper.ext.model({ cache: false });
+const profiles = hyper.ext.model({ cache: false, schema });
 
 Deno.test("upsert document successfully", async () => {
   const result = await profiles.upsert("1", { username: "rakis" });

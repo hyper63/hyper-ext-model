@@ -2,6 +2,7 @@
   "imports": {
     "asserts": "https://deno.land/std@0.125.0/testing/asserts.ts",
     "ramda": "https://cdn.skypack.dev/ramda@0.28.0",
-    "crocks": "https://cdn.skypack.dev/crocks@0.12.3"
+    "crocks": "https://cdn.skypack.dev/crocks@0.12.3",
+    "zod": "https://deno.land/x/zod@v3.11.6/mod.ts"
   }
 }
