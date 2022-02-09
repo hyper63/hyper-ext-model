@@ -1,0 +1,23 @@
+{
+  "$schema": "https://x.nest.land/eggs@0.3.8/src/schema.json",
+  "name": "hyper-ext-model",
+  "entry": "./dist/bundle.js",
+  "description": "hyper connect ext for model",
+  "homepage": "https://github.com/hyper63/hyper-ext-model",
+  "repo": "https://github.com/hyper63/hyper-ext-model",
+  "version": "0.0.1",
+  "unstable": false,
+  "unlisted": false,
+  "files": [
+    "./dist/bundle.js",
+    "./egg.json",
+    "./README.md"
+  ],
+  "ignore": [
+    "./.git*"
+  ],
+  "checkFormat": false,
+  "checkTests": false,
+  "checkInstallation": false,
+  "check": false
+}

@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declarationDir": "./types",
+    "declaration": true,
+    "outDir": "./types"
+  }
+}
