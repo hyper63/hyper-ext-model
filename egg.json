@@ -1,7 +1,7 @@
 {
   "$schema": "https://x.nest.land/eggs@0.3.8/src/schema.json",
   "name": "hyper-ext-model",
-  "entry": "./src/mod.ts",
+  "entry": "./dist/bundle.js",
   "description": "hyper connect ext for model",
   "homepage": "https://github.com/hyper63/hyper-ext-model",
   "repo": "https://github.com/hyper63/hyper-ext-model",
