@@ -31,7 +31,7 @@ import_map.json
 ```json
 {
   "imports": {
-    "hyper-ext-model": "https://x.nest.land/hyper-ext-model@VERSON/bundle.js
+    "hyper-ext-model": "https://x.nest.land/hyper-ext-model@VERSON/bundle.js"
   }
 }
 ```
