@@ -1,6 +1,8 @@
 <h1 align="center">⚡️ hyper-ext-model ⚡️</h1>
 <p align="center">A hyper-connect extension that specifies a generic model or entity for your application.</p>
 
+> ⚠️ This project is !! experimental !! and is subject to change, we are building it in public to transfer knowledge and identify issues and concerns as we go through the journey of composing the hyper services.
+
 ---
 
 ## Table of Contents
