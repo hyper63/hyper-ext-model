@@ -59,12 +59,10 @@ const profiles = hyper.ext.model({
   // custom (provide interpreter/env)
 })
 
-// add a profile document
-await profiles.add(doc)
+// add or update a profile document
+await profiles.upsert(id, doc)
 // get a profile document by id
 await profiles.get(id)
-// update a profile document
-await profiles.update(id, doc)
 // remove a profile document
 await profiles.remove(id)
 // query profiles
