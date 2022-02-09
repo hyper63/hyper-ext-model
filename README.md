@@ -51,6 +51,7 @@ const profiles = hyper.ext.model({
   search: ['name', 'email', 'username', 'phone'],
   count: true,
   notify: true,
+  attachments: true,
   mode: 'non-atomic' 
   // modes 
   // atomic - auto rollback if action fails - 
@@ -76,7 +77,13 @@ await profiles.count()
 // this function will rebalance counts, caches and search indexes 
 // based on a checkpoint
 await profiles.sync(checkpoint) // returns {ok: true, checkpoint: 'xxx'}
+
+// add attachment
+await profiles.addAttachment(name, stream)
+// download attachment
+await profiles.getAttachment(name) // returns stream
 ```
+
 
 ### Modes
 
