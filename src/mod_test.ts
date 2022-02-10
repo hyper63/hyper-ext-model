@@ -13,6 +13,13 @@ Deno.test("ok", () => {
 const hyper = model({
   data: {
     get: () => Promise.resolve({ _id: "1" }),
+    remove: () => Promise.resolve({ ok: true }),
+  },
+  cache: {
+    remove: () => Promise.resolve({ ok: true }),
+  },
+  search: {
+    remove: () => Promise.resolve({ ok: true }),
   },
 });
 const profiles = hyper.ext.model({ cache: false, schema });
@@ -31,8 +38,7 @@ Deno.test("get document successfully", async () => {
 
 Deno.test("remove document successfully", async () => {
   const result = await profiles.remove("1");
-  assertEquals(result.ok, false);
-  assertEquals(result.msg, "Not Implemented!");
+  assertEquals(result.ok, true);
 });
 
 Deno.test("query document successfully", async () => {

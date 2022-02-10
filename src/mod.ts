@@ -1,6 +1,7 @@
 import { mergeDeepRight } from "ramda";
 import { asyncify } from "./asyncify.ts";
 import { get } from "./actions/get.ts";
+import { remove } from "./actions/remove.ts";
 
 export const model = (hyper: unknown) => {
   const hyperAsync = asyncify(hyper);
@@ -13,7 +14,8 @@ export const model = (hyper: unknown) => {
             upsert: noop,
             get: (id: string) =>
               get(hyperAsync)(id).runWith(config).toPromise(),
-            remove: noop,
+            remove: (id: string) =>
+              remove(hyperAsync)(id).runWith(config).toPromise(),
             query: noop,
             search: noop,
             count: noop,
