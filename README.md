@@ -1,7 +1,7 @@
 <h1 align="center">⚡️ hyper-ext-model ⚡️</h1>
 <p align="center">A hyper-connect extension that specifies a generic model or entity for your application.</p>
 
-> ⚠️ This project is !! experimental !! and is subject to change, we are building it in public to transfer knowledge and identify issues and concerns as we go through the journey of composing the hyper services.
+> ⚠️ This project is !!**experimental**!! and is subject to change. We are building it in public to transfer knowledge and identify issues and concerns as we go through the journey of composing the hyper services.
 
 ---
 
@@ -16,7 +16,7 @@
 
 ## Summary
 
-hyper-ext-model is a hyper-connect extension that creates a model for your application connecting to the hyper service. For basic data structures hyper provides primitives to cache, search and notify services. Using this extension you can compose these services into a generic data model to define a given domain and provide basic business rules.
+hyper-ext-model is a hyper-connect extension that creates a model for an application that uses the hyper service. For basic data structures, hyper provides primitives to cache, search, and notify services. Using this extension you can compose these services into a generic data model to define a given domain and provide basic business rules.
 
 ## Install
 
@@ -87,11 +87,11 @@ await profiles.getAttachment(modelId, attachmentName) // returns stream
 
 ### Modes
 
-The modes, provide basic composition workflows for each action.
+Modes provide basic composition workflows for each action:
 
-- atomic - is all or nothing, kind of like a transaction is a relational database, if one operation fails, then the whole batch is rolled-back. it is possible the rollback fails and if it does, you may be in a partial state, but all operations will be idempotent which means that you can all the same action several times, and it will never create a duplicate document.
-- non-atomic - this feature is the default and if a secondary index fails it will not rollback the whole transaction, but it will return a message letting the caller know which part of the transaction failed, and then the caller can determine if they would like to retry the transaction or report the error to the user.
-- custom - this feature will allow the caller to specify an interpreter or env that instructs which operation mode at a granular level, for example, it may be something like this. modes: {cache: 'non-atomic', search: 'atomic', counter: 'atomic', queue: 'non-atomic'} - in this case, based on each operation the model flow will either behave in an atomic or non-atomic result.
+- `atomic` - is all or nothing. Similar to a transaction is a relational database. If one operation fails, the whole batch is rolled back. It is possible the rollback fails. If it does, you may be in a partial state. But, all operations will be idempotent which means that you can all the same action several times, and it will never create a duplicate document.
+- `non-atomic` - this feature is the default. A failure will not roll back the whole transaction, but it will return a message letting the caller know which part of the transaction failed. The caller can determine if they would like to retry the transaction or report the error to the user.
+- `custom` - this feature allows the caller to specify an interpreter or env that instructs which operation mode at a granular level, For example: `modes: {cache: 'non-atomic', search: 'atomic', counter: 'atomic', queue: 'non-atomic'}` - in this case, based on each operation the model flow will either behave in an atomic or non-atomic result.
 
 ## API
 
@@ -100,8 +100,8 @@ TBD
 
 ### Notify
 
-if enabled, then `model` will generate a notifiation event using the queue service based on model:actions, and the `action, result, timestamp, and identifier` will be supplied in the notification. Then the receive of the notification can extract any data based on their access level to the model and hyper app in question. This is great to trigger emails, or sms messages based on a specific event.
+If enabled, the model will generate a notification event using the queue service based on the model actions. The `action`, `result`, `timestamp`, and `identifier` will be supplied in the notification.  The notification recipient can extract any data based on their access level to the model and hyper app in question. This is great to trigger emails or SMS messages based on a specific event.
 
 ### Attachments
 
-if enabled, then the `model` can upload and download unstructured data files for a given model, this is great for models that have unstructured documents that accompany them.
+Enabling attachments is useful in cases where models are accompanied by unstructured documents. If enabled, the model can upload and download unstructured data files for a given model. 
