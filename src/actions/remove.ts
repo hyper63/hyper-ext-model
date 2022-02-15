@@ -49,3 +49,19 @@ export const remove = (hyper: H) =>
       .chain(removeFromSearch)
       .chain(removeFromCache)
       .chain(removeFromData);
+
+
+// first based on env via ask, we need to get all resources and put them in a context object
+// this context object will contain the context that is required to work through the pipeline
+/*
+ask(env => of(env)
+  .map(buildContext)
+  .chain(get)
+  .chain(remove)
+  .chain(dec)
+  .bichain(
+    ifElse(isAtomic, rollback, compose(of, prop('result'))),
+    ctx => of(ctx).chain(notify).map(prop('result'))
+  )
+).chain(lift)
+*/
