@@ -34,8 +34,7 @@ const doUpsert = (hyper: H, doc: unknown) =>
         compose(hyper.data.get, prop("_id"))(doc)
           .bichain(
             () => hyper.data.add(doc),
-            (old: unknown) =>
-              hyper.data.update(prop("_id", old), mergeRight(old, doc)),
+            (old: unknown) => hyper.data.update(prop("_id", old), doc),
           )
       );
 
