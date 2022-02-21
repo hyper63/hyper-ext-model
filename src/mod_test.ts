@@ -17,6 +17,7 @@ const hyper = model({
     get: () => Promise.resolve({ _id: "1", username: "rakis" }),
     update: () => Promise.resolve({ ok: true }),
     remove: () => Promise.resolve({ ok: true }),
+    query: () => Promise.resolve({ ok: true, docs: [] }),
   },
   cache: {
     remove: () => Promise.resolve({ ok: true }),
@@ -46,8 +47,8 @@ Deno.test("remove document successfully", async () => {
 
 Deno.test("query document successfully", async () => {
   const result = await profiles.query({ group: "admin" }, { limit: 10 });
-  assertEquals(result.ok, false);
-  assertEquals(result.msg, "Not Implemented!");
+  assertEquals(result.ok, true);
+  assertEquals(result.docs.length, 0);
 });
 
 Deno.test("search document successfully", async () => {
