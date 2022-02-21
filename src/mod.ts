@@ -4,6 +4,7 @@ import { get } from "./actions/get.ts";
 import { remove } from "./actions/remove.ts";
 import { upsert } from "./actions/upsert.ts";
 import { query } from "./actions/query.ts";
+import type { Config } from "./types.ts";
 
 export const model = (hyper: unknown) => {
   const hyperAsync = asyncify(hyper);
@@ -11,7 +12,7 @@ export const model = (hyper: unknown) => {
     hyper,
     {
       ext: {
-        model(config: unknown) {
+        model(config: Config) {
           return Object.freeze({
             upsert: (id: string, doc: unknown) =>
               upsert(hyperAsync)(id, doc).runWith(config).toPromise(),
