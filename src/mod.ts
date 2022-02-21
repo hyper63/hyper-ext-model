@@ -2,6 +2,7 @@ import { mergeDeepRight } from "ramda";
 import { asyncify } from "./asyncify.ts";
 import { get } from "./actions/get.ts";
 import { remove } from "./actions/remove.ts";
+import { upsert } from "./actions/upsert.ts";
 
 export const model = (hyper: unknown) => {
   const hyperAsync = asyncify(hyper);
@@ -11,7 +12,8 @@ export const model = (hyper: unknown) => {
       ext: {
         model(config: unknown) {
           return Object.freeze({
-            upsert: noop,
+            upsert: (id: string, doc: unknown) =>
+              upsert(hyperAsync)(id, doc).runWith(config).toPromise(),
             get: (id: string) =>
               get(hyperAsync)(id).runWith(config).toPromise(),
             remove: (id: string) =>

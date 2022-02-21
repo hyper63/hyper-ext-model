@@ -1,4 +1,6 @@
 import { Async, ReaderT } from "crocks";
+import type { Config } from "../types.ts";
+
 //import { z } from "zod";
 
 const { of, ask, lift } = ReaderT(Async);
@@ -12,11 +14,6 @@ interface H {
   };
 }
 
-interface config {
-  cache: boolean;
-  schema: unknown;
-}
-
 // @ts-ignore allow any type
 const validate = (schema) =>
   (doc: unknown) => {
@@ -26,13 +23,11 @@ const validate = (schema) =>
   };
 
 const doGet = (hyper: H, id: string) =>
-  ({ cache, schema }: config) =>
-    cache
-      ? hyper.cache.get(id)
-        .bichain(hyper.data.get, Async.Resolved)
+  ({ schema }: Config) =>
+    schema
+      ? hyper.data.get(id)
         .chain(validate(schema))
-      : hyper.data.get(id)
-        .chain(validate(schema));
+      : hyper.data.get(id);
 
 export const get = (hyper: H) =>
   (id: string) =>

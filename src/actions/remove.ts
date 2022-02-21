@@ -54,6 +54,7 @@ const validateDocument = ifElse(
         (e) => {
           console.log(e);
           return Async.Rejected({
+            ok: false,
             msg: "ERROR: could not parse",
             issues: e.issues,
           });
@@ -61,6 +62,7 @@ const validateDocument = ifElse(
         // @ts-ignore zod success
         ({ success, error }) =>
           success ? Async.Resolved(ctx) : Async.Rejected({
+            ok: false,
             msg: "ERROR: could not remove, document invalid",
             issues: error.issues,
           }),

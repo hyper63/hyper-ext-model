@@ -2,6 +2,7 @@
 
 // model configuration flags
 export interface Config {
+  name: string;
   schema: unknown;
   log: boolean;
   /*
