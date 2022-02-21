@@ -4,6 +4,7 @@ import { z } from "zod";
 
 const schema = z.object({
   _id: z.string(),
+  username: z.string(),
 });
 
 Deno.test("ok", () => {
@@ -12,15 +13,25 @@ Deno.test("ok", () => {
 
 const hyper = model({
   data: {
-    get: () => Promise.resolve({ _id: "1" }),
+    add: () => Promise.resolve({ ok: true }),
+    get: () => Promise.resolve({ _id: "1", username: "rakis" }),
+    update: () => Promise.resolve({ ok: true }),
+    remove: () => Promise.resolve({ ok: true }),
+    query: () => Promise.resolve({ ok: true, docs: [] }),
+  },
+  cache: {
+    remove: () => Promise.resolve({ ok: true }),
+  },
+  search: {
+    remove: () => Promise.resolve({ ok: true }),
   },
 });
-const profiles = hyper.ext.model({ cache: false, schema });
+const profiles = hyper.ext.model({ name: "profile", cache: false, schema });
 
 Deno.test("upsert document successfully", async () => {
-  const result = await profiles.upsert("1", { username: "rakis" });
-  assertEquals(result.ok, false);
-  assertEquals(result.msg, "Not Implemented!");
+  const result = await profiles.upsert("1", { _id: "1", username: "rakis" });
+  assertEquals(result.ok, true);
+  //assertEquals(result.msg, "Not Implemented!");
 });
 
 Deno.test("get document successfully", async () => {
@@ -31,14 +42,13 @@ Deno.test("get document successfully", async () => {
 
 Deno.test("remove document successfully", async () => {
   const result = await profiles.remove("1");
-  assertEquals(result.ok, false);
-  assertEquals(result.msg, "Not Implemented!");
+  assertEquals(result.ok, true);
 });
 
 Deno.test("query document successfully", async () => {
   const result = await profiles.query({ group: "admin" }, { limit: 10 });
-  assertEquals(result.ok, false);
-  assertEquals(result.msg, "Not Implemented!");
+  assertEquals(result.ok, true);
+  assertEquals(result.docs.length, 0);
 });
 
 Deno.test("search document successfully", async () => {

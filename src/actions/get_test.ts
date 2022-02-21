@@ -19,13 +19,13 @@ const hyperAsync = {
 };
 
 Deno.test("get document by id from cache", async () => {
-  const result = await get(hyperAsync)("1").runWith({ cache: true, schema })
+  const result = await get(hyperAsync)("1").runWith({ schema })
     .toPromise();
   assertEquals(result._id, "1");
 });
 
-Deno.test("get document by id no cache", async () => {
-  const result = await get(hyperAsync)("1").runWith({ cache: false, schema })
+Deno.test("get document by id no schema", async () => {
+  const result = await get(hyperAsync)("1").runWith({})
     .toPromise();
   assertEquals(result._id, "1");
 });
